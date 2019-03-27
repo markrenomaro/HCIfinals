@@ -1,194 +1,219 @@
-.container1{
-	height: 350;
-	width: 500;
-	margin-left: 450px;
-	background-color: E2E3E8;
-	padding-top: 20px;
+/* navigation styles start here */
+
+header {
+  background: var(--background);
+  text-align: center;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
 }
 
-h1{
-	font-size: 20px;
-	font-family: impact;
-	color:#C70039;
-	margin-left: 500px;
+/* changed this from the tutorial video to
+   allow it to gain focus, making it tabbable */
+.nav-toggle {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }
+
+.nav-toggle:focus ~ .nav-toggle-label {
+  outline: 3px solid rgba(lightblue, .75);
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: white;
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+  top: 7px;
+}
+
+nav {
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  background: var(--background);
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1,1);
+}
+
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+  }
+  
+  .logo {
+    grid-column: 2 / 3;
+  }
+  
+  nav {
+    // all: unset; /* this causes issues with Edge, since it's unsupported */
+    
+    /* the following lines are not from my video, but add Edge support */
+    position: relative;
+    text-align: left;
+    transition: none;
+    transform: scale(1,1);
+    background: none;
+    top: initial;
+    left: initial;
+    /* end Edge support stuff */
+    
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  nav ul {
+    display: flex;
+  }
+  
+  nav li {
+    margin-left: 3em;
+    margin-bottom: 0;
+  }
+  
+  nav a {
+    opacity: 1;
+    position: relative;
+  }
+  
+  nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: black;
+    position: absolute;
+    top: -.75em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+  
+  nav a:hover::before {
+    transform: scale(1,1);
+  }
+}
+
 body{
-	background-color: FFFFFF;
-	background: url(789.jpg);
-	background-position: fixed;
+  background-color: black;
 }
-input{
-	margin-left: 20px;
-	margin-bottom: 10px;
-	padding: 10px;
-	border-radius: 50px;
-	border-style: solid;
+h1{
+  color:white;
+}
 
-}
-label{
-	font-size: 15px;
-	margin-left: 30px;
-	margin-bottom: 10px;
-}
-div{
-	  border-style: solid;
-	  border-color: 000000;
-}
-.button{
-	cursor: pointer;
-    padding: 0;
-    border-style: solid;
-    cursor: pointer;
-    min-width: 187px;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 12px;
-    line-height: 16px;
-    background-color: #fff;
-    border-color: #000;
-    min-height: 32px;
-    line-height: 30px;
-    border-radius: 16px;
-    margin-left: 150px;
-    margin-top: 15px;
-}
-.button:hover{
-	background-color: #FFFDFC;
-	color: #6E6C6D;
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-.tabs {
-    margin:  0;
-    padding: 0;
-    list-style: none;
-    display: table;
-    table-layout: fixed; 
-    width: 100%; 
 }
 
-    .tabs__item {
-        width: 100%;
-        float: left;
-    }
+.bg-image {
+  /* Full height */
+  height: 50%; 
 
-    @media screen and (min-width: 40em) {
-        .tabs__item {
-          display: table-cell;
-          float: none;
-          width: auto;
-        }
-    }
-        .tabs__link {
-            display: block; 
-        }
-.primary-nav {
-    text-align: center;
-    border-radius: 0;
-    overflow: hidden; 
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-        .primary-nav a {
-            padding: .75em 1em;
-            color: white;
-            background:7E857E;
-            color:#2C528C;
-            text-decoration: none;
-            border-right: 1px solid #000;
-            font-family: Impact;
-            font-weight: 400;
-            font-size: 1.75em;
-        }
-        .primary-nav a:hover {
-            color: #2C528C;
-            background: #C0C0C0;
-        }
-.js .nav-collapse {
-  clip: rect(0 0 0 0);
-  max-height: 0;
-  position: absolute;
-  display: block;
-  overflow: hidden;
-  zoom: 1;
-}
-.nav-collapse.opened {
-  max-height: 9999px;
-}
-.disable-pointer-events {
-  pointer-events: none !important;
-}
-.nav-toggle {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-@media screen and (min-width: 40em) {
-  .js .nav-collapse {
-    position: relative;
-  }
-  .js .nav-collapse.closed {
-    max-height: none;
-  }
-  .nav-toggle {
-    display: none;
-  }
-}
-.nav-collapse {
-  list-style: none;
-  width: 100%;
-  float: left;
-}
-.fixed {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-.nav-toggle {
-  position: fixed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  text-decoration: none;
-  text-indent: -999px;
-  position: relative;
-  overflow: hidden;
-  width: 70px;
-  height: 55px;
-  float: right;
-}
-.nav-toggle:before {
-  color: #f8d800; /* Edit this to change the icon color */
-  font-family: "responsivenav", sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  font-size: 28px;
-  text-transform: none;
-  position: absolute;
-  content: "≡";
-  text-indent: 0;
+
+/* Images used */
+.img1 { background-image: url("sp.jpg"); }
+.img2 { background-image: url("j1.jpg"); }
+.img3 { background-image: url("kanye.jpg"); }
+.img4 { background-image: url("aaa.jpeg"); }
+.img5 { background-image: url("v.jpg"); }
+.img6 { background-image: url("ooff.jpg"); }
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  font-size: 80px;
+  border: 10px solid #f1f1f1;
+  position: fixed; /* Stay fixed */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 300px;
+  padding: 20px;
   text-align: center;
-  line-height: 55px;
-  speak: none;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-.nav-toggle.active::before {
-  font-size: 24px;
-  content:"x";
 }
